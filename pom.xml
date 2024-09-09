@@ -35,6 +35,7 @@
         <module>online</module>
         <module>physical</module>
         <module>hotel</module>
+        <module>start</module>
     </modules>
 
     <properties>
