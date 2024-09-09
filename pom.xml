@@ -43,7 +43,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.1.6</spring-boot.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
-        <swagger.version>2.10.5</swagger.version>
+        <swagger.version>2.9.2</swagger.version>
         <mysql.version>8.0.33</mysql.version>
         <springdoc.version>2.2.0</springdoc.version>
         <jsonwebtoken.version>0.12.5</jsonwebtoken.version>
