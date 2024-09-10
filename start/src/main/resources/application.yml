@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: start
+  datasource:
+    url: jdbc:mysql://localhost:3306/hmdp
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456

@@ -6,17 +6,47 @@
 		<groupId>pr</groupId>
 		<artifactId>pipay-shop</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<!--		<relativePath>../</relativePath>-->
+<!--		<relativePath>../</relativePath>-->
 	</parent>
-
 	<artifactId>start</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<!-- 添加其他模块依赖，作为总启动类 -->
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>pr</groupId>
+			<artifactId>user</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>pr</groupId>
+			<artifactId>chat</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>pr</groupId>
+			<artifactId>online</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>pr</groupId>
+			<artifactId>physical</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>pr</groupId>
+			<artifactId>hotel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
