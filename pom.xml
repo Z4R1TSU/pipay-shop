@@ -60,6 +60,7 @@
         <jjwt.version>0.12.5</jjwt.version>
         <redisson.version>3.25.2</redisson.version>
         <hutool.version>5.8.24</hutool.version>
+        <lettuce-pool.version>2.11.1</lettuce-pool.version>
     </properties>
 
     <dependencies>
@@ -127,6 +128,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${lettuce-pool.version}</version>
             </dependency>
 <!--            <dependency>-->
 <!--                <groupId>io.jsonwebtoken</groupId>-->
