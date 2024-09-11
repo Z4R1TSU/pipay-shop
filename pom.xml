@@ -52,14 +52,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.1.6</spring-boot.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.10.5</swagger.version>
         <mysql.version>8.0.33</mysql.version>
         <springdoc.version>2.2.0</springdoc.version>
         <jsonwebtoken.version>0.12.5</jsonwebtoken.version>
         <lombok.version>1.18.24</lombok.version>
         <jjwt.version>0.12.5</jjwt.version>
-        <redisson.version>3.25.2</redisson.version>
-        <hutool.version>5.8.24</hutool.version>
+        <redisson.version>3.36.0</redisson.version>
+        <hutool.version>5.8.32</hutool.version>
         <lettuce-pool.version>2.11.1</lettuce-pool.version>
     </properties>
 
