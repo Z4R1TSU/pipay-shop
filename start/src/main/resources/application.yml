@@ -1,18 +1,4 @@
 spring:
   application:
     name: start
-  datasource:
-    url: jdbc:mysql://localhost:3306/hmdp
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      lettuce:
-        pool:
-          max-active: 8
-          max-idle: 8
-          min-idle: 0
-          max-wait: -1ms
+
