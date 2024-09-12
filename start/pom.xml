@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>pr</groupId>
 		<artifactId>pipay-shop</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-<!--		<relativePath>../</relativePath>-->
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>start</artifactId>
 
@@ -19,32 +19,32 @@
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>user</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>chat</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>online</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>physical</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>pr</groupId>
 			<artifactId>hotel</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 
 	</dependencies>

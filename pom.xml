@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
     <groupId>pr</groupId>
     <artifactId>pipay-shop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>pipay-shop</name>
     <description>pipay-shop</description>
 
@@ -61,6 +61,7 @@
         <redisson.version>3.36.0</redisson.version>
         <hutool.version>5.8.32</hutool.version>
         <lettuce-pool.version>2.11.1</lettuce-pool.version>
+        <revision>0.0.1-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
