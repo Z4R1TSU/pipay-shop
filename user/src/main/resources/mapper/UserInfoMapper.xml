@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pr.user.mapper.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="pr.user.entity.UserInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="uid" column="uid" jdbcType="VARCHAR"/>
+            <result property="piName" column="pi_name" jdbcType="VARCHAR"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="accessToken" column="access_token" jdbcType="VARCHAR"/>
+            <result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"/>
+            <result property="personalProfile" column="personal_profile" jdbcType="VARCHAR"/>
+            <result property="country" column="country" jdbcType="VARCHAR"/>
+            <result property="language" column="language" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+            <result property="level" column="level" jdbcType="TINYINT"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="userImage" column="user_image" jdbcType="VARCHAR"/>
+            <result property="shopBalance" column="shop_balance" jdbcType="INTEGER"/>
+            <result property="gender" column="gender" jdbcType="TINYINT"/>
+            <result property="userIp" column="user_ip" jdbcType="VARCHAR"/>
+            <result property="piShoper" column="pi_shoper" jdbcType="TINYINT"/>
+            <result property="supplier" column="supplier" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,uid,pi_name,
+        user_name,access_token,last_login,
+        personal_profile,country,language,
+        email,phone,real_name,
+        level,age,status,
+        user_image,shop_balance,gender,
+        user_ip,pi_shoper,supplier
+    </sql>
+</mapper>
