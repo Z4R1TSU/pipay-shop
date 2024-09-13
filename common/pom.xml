@@ -6,7 +6,7 @@
 		<groupId>pr</groupId>
 		<artifactId>pipay-shop</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>..</relativePath>
 	</parent>
     <artifactId>common</artifactId>
 
