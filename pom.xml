@@ -52,11 +52,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.1.6</spring-boot.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
-        <swagger.version>2.10.5</swagger.version>
+<!--        <swagger.version>2.10.5</swagger.version>-->
+        <knife4j.version>4.4.0</knife4j.version>
         <mysql.version>8.0.33</mysql.version>
         <springdoc.version>2.2.0</springdoc.version>
         <jsonwebtoken.version>0.12.5</jsonwebtoken.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <jjwt.version>0.12.5</jjwt.version>
         <redisson.version>3.36.0</redisson.version>
         <hutool.version>5.8.32</hutool.version>
@@ -96,15 +97,20 @@
                 <version>${lombok.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.springfox</groupId>-->
+<!--                <artifactId>springfox-swagger2</artifactId>-->
+<!--                <version>${swagger.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.springfox</groupId>-->
+<!--                <artifactId>springfox-swagger-ui</artifactId>-->
+<!--                <version>${swagger.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>

@@ -14,3 +14,15 @@ spring:
           max-idle: 8
           min-idle: 0
           max-wait: -1ms
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+knife4j:
+  basic:
+    enable: true
+  setting:
+    language: zh_cn

@@ -1,5 +1,6 @@
 package pr.user.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import pr.user.entity.UserInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
