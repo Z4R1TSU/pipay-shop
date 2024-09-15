@@ -1,6 +1,9 @@
 spring:
+  # TODO: 导入common配置到其他模块，以后所有模块更改，都需要同步更新
+  profiles:
+    active: chat, hotel, online, physical, start, user
   datasource:
-    url: jdbc:mysql://localhost:3306/pipay-shop
+    url: jdbc:mysql://localhost:3306/pipayshop
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
