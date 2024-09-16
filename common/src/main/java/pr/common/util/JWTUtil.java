@@ -1,18 +1,18 @@
 package pr.common.util;
 
-import io.jsonwebtoken.Jwts;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+import cn.hutool.json.JSONObject;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTPayload;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
 import java.util.Date;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.SignatureException;
+import java.util.HashMap;
+import java.util.Map;
+
+import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 
 @Component
 @Slf4j
@@ -22,68 +22,96 @@ public class JWTUtil {
     private static final Long JWT_TTL = 8 * 60 * 60 * 1000L;
 
     // 硬编码密钥
-    private static final String SECRET_KEY = "f356cdce935c42328ad2001d7e9552a3";
+    private static final String SECRET_KEY = "PaiRuan-Shop";
 
-    private static final SecretKey JWT_KEY;
-
-    // 这是使用static块来初始化密钥的，这样可以保证密钥只被初始化一次，避免多次生成密钥对象
-    static {
-        byte[] encodeKey = Base64.getDecoder().decode(SECRET_KEY);
-        JWT_KEY = new SecretKeySpec(encodeKey, "AES");
-    }
+//    private static final SecretKey JWT_KEY;
+//
+//    // 这是使用static块来初始化密钥的，这样可以保证密钥只被初始化一次，避免多次生成密钥对象
+//    static {
+//        byte[] encodeKey = Base64.getDecoder().decode(SECRET_KEY);
+//        JWT_KEY = Keys.hmacShaKeyFor(encodeKey); // 使用 HMAC-SHA 算法生成密钥
+//    }
 
     // 生成token
-    public String generateToken(String username) {
+    public static String generateToken(String username) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_TTL);
-
-        return Jwts.builder()
-                .subject(username)
-                .issuedAt(now)
-                .expiration(expiryDate)
-                .signWith(JWT_KEY)
-                .compact();
+        Map<String, Object> payload = new HashMap<>();
+        payload.put(JWTPayload.ISSUED_AT, now);
+        payload.put(JWTPayload.EXPIRES_AT, expiryDate);
+        payload.put(JWTPayload.NOT_BEFORE, now);
+        payload.put("username", username);
+        return cn.hutool.jwt.JWTUtil.createToken(payload, SECRET_KEY.getBytes());
     }
 
     // 根据token获取用户名
-    public String parseToken(String token) {
-        return Jwts.parser()
-                .verifyWith(JWT_KEY)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
+    public static JSONObject parseToken(String token) {
+        JWT jwt = cn.hutool.jwt.JWTUtil.parseToken(token).setKey(SECRET_KEY.getBytes());
+        JSONObject payloads = jwt.getPayloads();
+        payloads.remove(JWTPayload.ISSUED_AT);
+        payloads.remove(JWTPayload.EXPIRES_AT);
+        payloads.remove(JWTPayload.NOT_BEFORE);
+        return payloads;
     }
 
-    // 验证token是否有效
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser()
-                    .verifyWith(JWT_KEY)
-                    .build()
-                    .parseSignedClaims(token);
-
-            // 检查token是否过期
-            Date expiration = Jwts.parser()
-                    .verifyWith(JWT_KEY)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload()
-                    .getExpiration();
-
-            return new Date().before(expiration);
-        } catch (ExpiredJwtException e) {
-            log.warn("Token已过期: {}", e.getMessage());
-        } catch (SignatureException e) {
-            log.warn("无效的JWT签名: {}", e.getMessage());
-        } catch (MalformedJwtException e) {
-            log.warn("无效的JWT token: {}", e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            log.warn("不支持的JWT token: {}", e.getMessage());
-        } catch (IllegalArgumentException e) {
-            log.warn("JWT claims字符串为空: {}", e.getMessage());
+    // 验证token并返回结果
+    public static TokenValidationResult validateToken(String token) {
+        if (token == null || token.isEmpty()) {
+            return new TokenValidationResult(false, "令牌为空");
         }
-        return false;
+
+        String[] parts = token.split("\\.");
+        if (parts.length != 3) {
+            return new TokenValidationResult(false, "令牌格式不正确，应包含三个部分");
+        }
+
+        try {
+            // 验证头部
+            String header = new String(Base64.getDecoder().decode(parts[0]), StandardCharsets.UTF_8);
+            if (!header.contains("\"alg\":") || !header.contains("\"typ\":")) {
+                return new TokenValidationResult(false, "令牌头部格式不正确");
+            }
+
+            // 验证载荷
+            String payload = new String(Base64.getDecoder().decode(parts[1]), StandardCharsets.UTF_8);
+            if (!payload.contains("\"exp\":")) {
+                return new TokenValidationResult(false, "令牌载荷缺少过期时间");
+            }
+
+            // 验证签名
+            boolean verify = cn.hutool.jwt.JWTUtil.verify(token, SECRET_KEY.getBytes());
+            if (!verify) {
+                return new TokenValidationResult(false, "令牌签名无效");
+            }
+
+            // 验证过期时间
+            JWT jwt = cn.hutool.jwt.JWTUtil.parseToken(token).setKey(SECRET_KEY.getBytes());
+            if (!jwt.validate(0)) {
+                return new TokenValidationResult(false, "令牌已过期");
+            }
+
+            return new TokenValidationResult(true, "令牌有效");
+        } catch (Exception e) {
+            return new TokenValidationResult(false, "令牌验证失败: " + e.getMessage());
+        }
     }
 
+    // 用于返回验证结果的内部类
+    public static class TokenValidationResult {
+        private final boolean valid;
+        private final String message;
+
+        public TokenValidationResult(boolean valid, String message) {
+            this.valid = valid;
+            this.message = message;
+        }
+
+        public boolean isValid() {
+            return valid;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
 }
