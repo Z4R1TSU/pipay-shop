@@ -30,7 +30,7 @@ public class JWTUtil {
 //    }
 
     // 生成token
-    public static String generateToken(String username) {
+    public String generateToken(String username) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + Constants.REDIS_TOKEN_EXPIRE_TIME);
         Map<String, Object> payload = new HashMap<>();
@@ -42,7 +42,7 @@ public class JWTUtil {
     }
 
     // 根据token获取用户名
-    public static JSONObject parseToken(String token) {
+    public JSONObject parseToken(String token) {
         JWT jwt = cn.hutool.jwt.JWTUtil.parseToken(token).setKey(SECRET_KEY.getBytes());
         JSONObject payloads = jwt.getPayloads();
         payloads.remove(JWTPayload.ISSUED_AT);
@@ -52,7 +52,7 @@ public class JWTUtil {
     }
 
     // 验证token并返回结果
-    public static TokenValidationResult validateToken(String token) {
+    public TokenValidationResult validateToken(String token) {
         if (token == null || token.isEmpty()) {
             return new TokenValidationResult(false, "令牌为空");
         }
@@ -94,7 +94,7 @@ public class JWTUtil {
     }
 
     // 用于返回验证结果的内部类
-    public static class TokenValidationResult {
+    public class TokenValidationResult {
         private final boolean valid;
         private final String message;
 
