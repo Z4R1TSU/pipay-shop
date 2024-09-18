@@ -18,9 +18,6 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class JWTUtil {
 
-    // 设定过期时间为8小时
-    private static final Long JWT_TTL = 8 * 60 * 60 * 1000L;
-
     // 硬编码密钥
     private static final String SECRET_KEY = "PaiRuan-Shop";
 
@@ -35,7 +32,7 @@ public class JWTUtil {
     // 生成token
     public static String generateToken(String username) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + JWT_TTL);
+        Date expiryDate = new Date(now.getTime() + Constants.REDIS_TOKEN_EXPIRE_TIME);
         Map<String, Object> payload = new HashMap<>();
         payload.put(JWTPayload.ISSUED_AT, now);
         payload.put(JWTPayload.EXPIRES_AT, expiryDate);
