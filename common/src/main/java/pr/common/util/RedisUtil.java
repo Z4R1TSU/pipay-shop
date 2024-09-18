@@ -16,7 +16,7 @@ public class RedisUtil {
         this.redisTemplate = redisTemplate;
     }
 
-    public boolean expire(String key, long time) {
+    public static boolean expire(String key, long time) {
         try {
             if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
@@ -28,7 +28,7 @@ public class RedisUtil {
         }
     }
     
-    public long getExpire(String key) {
+    public static long getExpire(String key) {
         try {
             return redisTemplate.getExpire(key, TimeUnit.SECONDS);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class RedisUtil {
         }
     }
     
-    public boolean hasKey(String key) {
+    public static boolean hasKey(String key) {
         try {
             return redisTemplate.hasKey(key);
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class RedisUtil {
         }
     }
     
-    public void set(String key, Object value) {
+    public static void set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class RedisUtil {
         }
     }
 
-    public void set(String key, Object value, long timeout, TimeUnit unit) {
+    public static void set(String key, Object value, long timeout, TimeUnit unit) {
         try {
             redisTemplate.opsForValue().set(key, value, timeout, unit);
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class RedisUtil {
         }
     }
 
-    public Object get(String key) {
+    public static Object get(String key) {
         try {
             return redisTemplate.opsForValue().get(key);
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class RedisUtil {
         }
     }
 
-    public Boolean delete(String key) {
+    public static Boolean delete(String key) {
         try {
             return redisTemplate.delete(key);
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class RedisUtil {
         }
     }
 
-    public Long increment(String key, long delta) {
+    public static Long increment(String key, long delta) {
         try {
             return redisTemplate.opsForValue().increment(key, delta);
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class RedisUtil {
         }
     }
 
-    public Long decrement(String key, long delta) {
+    public static Long decrement(String key, long delta) {
         try {
             return redisTemplate.opsForValue().decrement(key, delta);
         } catch (Exception e) {
