@@ -42,19 +42,23 @@ public class RedisUtil {
         return redisTemplate.hasKey(key);
     }
     
-    public void set(String key, Object value) {
+    public boolean set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
+            return true;
         } catch (Exception e) {
             log.error("设置Redis键值对失败: key={}", key, e);
+            return false;
         }
     }
 
-    public void set(String key, Object value, long timeout, TimeUnit unit) {
+    public boolean set(String key, Object value, long timeout, TimeUnit unit) {
         try {
             redisTemplate.opsForValue().set(key, value, timeout, unit);
+            return true;
         } catch (Exception e) {
             log.error("设置Redis键值对(带过期时间)失败: key={}, timeout={}, unit={}", key, timeout, unit, e);
+            return false;
         }
     }
 
