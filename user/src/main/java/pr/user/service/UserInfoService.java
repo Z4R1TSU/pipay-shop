@@ -1,5 +1,9 @@
 package pr.user.service;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import pr.common.dto.LoginDTO;
+import pr.common.vo.Result;
 import pr.user.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserInfoService extends IService<UserInfo> {
 
+    Result login(LoginDTO loginDTO);
+    
+    Result generateCaptcha(HttpServletRequest request, HttpServletResponse response);
 }

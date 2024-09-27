@@ -3,6 +3,9 @@ package pr.user.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import pr.common.dto.LoginDTO;
 import pr.common.vo.Result;
@@ -26,7 +29,7 @@ public class UserInfoController {
     @GetMapping("selectUserInfoByUid/{uid}")
     @Operation(summary = "根据用户ID查询用户信息")
     public Result selectUserInfoByUid(@PathVariable String uid) {
-        return Result.success("查询成功");
+        return Result.fail(500, "待实现", uid);
     }
 
     @PostMapping("updateUserInfoByUid")
@@ -95,16 +98,16 @@ public class UserInfoController {
 //        return Result.success();
 //    }
 
-//    @PostMapping("userRegister")
-//    @Operation(summary = "普通浏览器登录")
-//    public Result userRegister(HttpServletRequest request, RegisterDTO registerDTO) {
-//        return Result.success();
-//    }
+    @PostMapping("userRegister")
+    @Operation(summary = "普通浏览器登录")
+    public Result userRegister(HttpServletRequest request, LoginDTO loginDTO) {
+        return Result.success("待实现");
+    }
 
-//    @GetMapping("/checkCode")
-//    @Operation(summary = "生成验证码，并保存值到redis中用于校验")
-//    public Result checkCode(HttpServletRequest request, HttpServletResponse response) {
-//        return Result.success();
-//    }
+    @GetMapping("/checkCode")
+    @Operation(summary = "生成验证码，并保存值到redis中用于校验")
+    public Result checkCode(HttpServletRequest request, HttpServletResponse response) {
+        return userInfoService.generateCaptcha(request, response);
+    }
 
 }
